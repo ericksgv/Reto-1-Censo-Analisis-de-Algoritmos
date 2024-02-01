@@ -65,7 +65,7 @@ def main():
         print("2. Ingrese un nombre de 4 caracteres")
         print("3. Salir")
 
-        opcion = input("Seleccione una opción (1/2/3): ")
+        opcion = input("Seleccione una opción: ")
 
         if opcion == '1':
             try:
