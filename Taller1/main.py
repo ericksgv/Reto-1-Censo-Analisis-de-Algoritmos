@@ -7,7 +7,7 @@ def generar_nombre():
     return ''.join(random.choices(string.ascii_uppercase, k=4))
 
 
-# Función para crear un registro con las características especificadas
+# Función para crear un registro con II, Nombre, edad, impuesto
 def crear_registro(id_ordenado):
     nombre = generar_nombre()
     edad = random.randint(18, 99)
@@ -66,7 +66,7 @@ def main():
         print("2. Ingrese un nombre de 4 caracteres")
         print("3. Salir")
 
-        opcion = input("Seleccione una opción (1/2/3): ")
+        opcion = input("Seleccione una opción: ")
 
         if opcion == '1':
             try:
