@@ -23,7 +23,8 @@ def crear_registro(id_ordenado):
 
 # Función para generar la lista de registros
 def generar_registros():
-    registros = [crear_registro(i) for i in range(500000)]
+    # Sumandole uno permite ingresar el 500000 cómo un id valido
+    registros = [crear_registro(i+1) for i in range(500000)]
     return registros
 
 
@@ -61,7 +62,7 @@ def main():
 
     # Menú principal
     while True:
-        print("1. Ingrese un ID menor a 500000")
+        print("1. Ingrese un ID menor/igual a 500000")
         print("2. Ingrese un nombre de 4 caracteres")
         print("3. Salir")
 
@@ -69,15 +70,17 @@ def main():
 
         if opcion == '1':
             try:
-                id_ingresado = int(input("Ingrese un ID menor a 500000: "))
-                if id_ingresado < 500000:
+                id_ingresado = int(input("Ingrese un ID menor/igual a 500000: "))
+                if 500000 >= id_ingresado >= 1:
                     resultado_busqueda = buscar_id(registros, id_ingresado)
                     if resultado_busqueda:
                         print("ID encontrado:", resultado_busqueda)
                     else:
                         print("ID no encontrado en la lista.")
-                else:
-                    print("El ID debe ser menor a 500000. Intenta de nuevo.")
+                elif id_ingresado > 500000:
+                    print("El ID debe ser menor/igual a 500000. Intenta de nuevo.")
+                elif id_ingresado < 1:
+                    print("El ID no puede ser menor a 1. Intenta de nuevo.")
             except ValueError:
                 print("Por favor, ingrese un número válido.")
 
