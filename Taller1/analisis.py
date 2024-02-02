@@ -1,7 +1,7 @@
 import random
 import string
 import time
-
+import matplotlib.pyplot as plt
 
 # Función para generar un nombre aleatorio de 4 caracteres en mayúsculas
 def generar_nombre():
@@ -133,4 +133,14 @@ def main():
         print(f"\nTiempos para busqueda {busqueda}")
         for i, t in zip(valores_n, tiempos_busquedas[busqueda]):
             print(f"Valor de n: {i} ->  {t} segundos")
+
+    # Graficar resultados
+    plt.plot(valores_n, tiempos_busquedas["lineal"], label="Búsqueda Lineal", marker='o', color="green")
+    plt.plot(valores_n, tiempos_busquedas["binaria"], label="Búsqueda Binaria", marker='o', color="purple")
+    plt.xlabel("Tamaño de la lista de registros")
+    plt.ylabel("Tiempo de ejecución (s)")
+    plt.title("Búsqueda Lineal VS Búsqueda Binaria")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
 main()
