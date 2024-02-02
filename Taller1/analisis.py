@@ -22,7 +22,7 @@ def crear_registro(id_ordenado):
     }
 
 
-def imprmir_registro(registro):
+def imprimir_registro(registro):
     print("\n--Inicio de registro--")
     for key, value in registro.items():
         print(f"{key}: {value}")
@@ -55,10 +55,16 @@ def buscar_id(registros, id_ingresado):
 
 
 # Función para Buscar de forma secuencial los nombres
-def buscar_nombre(registros, nombre_ingresado):
+def buscar_nombre(registros, nombre_ingresado, id_usuario):
     nombre_mayusculas = nombre_ingresado.upper()
     for registro in registros:
-        if registro['nombre'] == nombre_mayusculas:
+        # Para hacer una comparación justa
+        # Dado que muchos registros pueden compartir el mismo nombre
+        # Se asegura que se encuentra el nombre del registro que tiene
+        # el id recibido por la función de modo que sea ese registro y no
+        # otro registro con el mismo nombre pero diferente id y así ver
+        # la comparación un poco más adecuada
+        if registro['nombre'] == nombre_mayusculas and registro["id_ordenado"] == id_usuario:
             return registro
     return None
 
@@ -89,20 +95,28 @@ def main():
         # Generar la lista con el valor actual de num_registros
         registros = generar_registros(cantidad)
 
+        print(f"Hay {len(registros)} ")
+
         # Imprimir datos del último registro en el arreglo
-        imprmir_registro(registros[-1])
+        imprimir_registro(registros[-1])
 
         # Calcular tiempo de ejecución de función de búsqueda lineal
         nombre = registros[-1]["nombre"]
+        id = registros[-1]["id_ordenado"]
 
         # Empezar conteo
         inicio = time.perf_counter()
 
         # Encontrar último elemento del arreglo de registros por nombre (Busqueda lineal)
-        buscar_nombre(registros, nombre)
+        registro = buscar_nombre(registros, nombre, id)
 
         # Fin del conteo
         fin = time.perf_counter()
+
+        if registro:
+            print("\nRegistro encontrado")
+            imprimir_registro(registro)
+            print("\nRegistro encontrado")
 
         # Tiempo total para ejecutar busqueda lineal
         tiempos_busquedas["lineal"].append(fin - inicio)
